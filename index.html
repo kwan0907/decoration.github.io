@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匠心室內設計裝修 - 專業劏房設計及全方位裝修服務</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ecf0f1;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="%23f8f9fa"><rect width="1200" height="800" fill="%23e9ecef"/><circle cx="200" cy="200" r="100" fill="%23dee2e6"/><rect x="400" y="150" width="200" height="100" fill="%23ced4da"/><circle cx="800" cy="300" r="80" fill="%23adb5bd"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #e9ecef, #ced4da);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #6c757d;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-content h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a252f;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid,
+            .team-grid,
+            .projects-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">匠心裝修</div>
+            <ul class="nav-links">
+                <li><a href="#home">首頁</a></li>
+                <li><a href="#services">服務項目</a></li>
+                <li><a href="#team">專業團隊</a></li>
+                <li><a href="#projects">工程案例</a></li>
+                <li><a href="#contact">聯絡我們</a></li>
+            </ul>
+            <div class="mobile-menu">☰</div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>專業室內設計 · 劏房改造專家</h1>
+            <p>擁有齊全專業團隊，包括泥水師傅、電工及小型工程牌師傅，為您打造理想居住空間</p>
+            <a href="#contact" class="cta-button">免費報價</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">服務項目</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">🏠</div>
+                    <h3>劏房設計改造</h3>
+                    <p>專業劏房設計，充分利用空間，提供舒適實用的居住環境。包括間隔設計、水電安裝及裝修工程。</p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">🔧</div>
+                    <h3>室內裝修工程</h3>
+                    <p>全面裝修服務，從設計規劃到施工完成，包括泥水、油漆、地板安裝等各項工程。</p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">⚡</div>
+                    <h3>水電工程</h3>
+                    <p>持牌電工提供專業水電安裝及維修服務，確保安全可靠，符合法規要求。</p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">🏗️</div>
+                    <h3>小型工程</h3>
+                    <p>持有小型工程牌照，可合法進行各類小型建築工程，包括間隔牆、天花板等結構改動。</p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">🎨</div>
+                    <h3>室內設計</h3>
+                    <p>專業設計團隊提供室內設計服務，從平面規劃到3D效果圖，為您打造獨特空間。</p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">🔨</div>
+                    <h3>維修保養</h3>
+                    <p>提供裝修後的維修保養服務，定期檢查及維護，確保工程質量及使用壽命。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title">專業團隊</h2>
+            <div class="team-grid">
+                <div class="team-member fade-in-up">
+                    <div class="team-avatar">陳</div>
+                    <h3>陳師傅 - 項目經理</h3>
+                    <p>15年裝修經驗，專責項目統籌及質量監控</p>
+                </div>
+                <div class="team-member fade-in-up">
+                    <div class="team-avatar">李</div>
+                    <h3>李師傅 - 泥水工程</h3>
+                    <p>20年泥水經驗，專業砌磚、批盪及瓦片工程</p>
+                </div>
+                <div class="team-member fade-in-up">
+                    <div class="team-avatar">王</div>
+                    <h3>王師傅 - 持牌電工</h3>
+                    <p>持有電工牌照，專責所有電力安裝及維修工作</p>
+                </div>
+                <div class="team-member fade-in-up">
+                    <div class="team-avatar">張</div>
+                    <h3>張師傅 - 小型工程</h3>
+                    <p>持有小型工程牌照，負責結構改動及建築工程</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">工程案例</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in-up">
+                    <div class="project-image">🏠</div>
+                    <div class="project-content">
+                        <h3>太子區劏房改造</h3>
+                        <p>將原本狹小的單位改造成三個獨立劏房，每間都具備完整設施及私人空間。</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in-up">
+                    <div class="project-image">🏢</div>
+                    <div class="project-content">
+                        <h3>深水埗舊樓翻新</h3>
+                        <p>全面翻新舊式唐樓單位，包括水電重鋪、間隔重新規劃及現代化裝修。</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in-up">
+                    <div class="project-image">🏘️</div>
+                    <div class="project-content">
+                        <h3>油麻地工廈劏房</h3>
+                        <p>工廈單位改造成多個劏房，充分利用空間，提供經濟實惠的住宿選擇。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">聯絡我們</h2>
+            <div class="contact-grid">
+                <div class="contact-info fade-in-up">
+                    <h3>聯絡資料</h3>
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span>電話：+852 9XXX XXXX</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span>電郵：info@renovation.hk</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>地址：香港九龍XXX</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🕐</span>
+                        <span>營業時間：週一至六 9:00-18:00</span>
+                    </div>
+                    
+                    <h3 style="margin-top: 30px;">服務範圍</h3>
+                    <p>主要服務港九新界，包括：</p>
+                    <p>• 九龍區：旺角、深水埗、太子、油麻地</p>
+                    <p>• 港島區：上環、中環、灣仔、銅鑼灣</p>
+                    <p>• 新界區：荃灣、沙田、屯門、元朗</p>
+                </div>
+                
+                <div class="contact-form fade-in-up">
+                    <h3>免費報價查詢</h3>
+                    <form>
+                        <div class="form-group">
+                            <label>姓名</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>電話</label>
+                            <input type="tel" required>
+                        </div>
+                        <div class="form-group">
+                            <label>工程類型</label>
+                            <input type="text" placeholder="例：劏房改造、室內裝修等">
+                        </div>
+                        <div class="form-group">
+                            <label>詳細需求</label>
+                            <textarea placeholder="請描述您的工程需求..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">提交查詢</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 匠心室內設計裝修. 版權所有 | 專業可靠 · 品質保證</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Form submission
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感謝您的查詢！我們將盡快與您聯絡。');
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animation to fade-in elements
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, #1a252f, #2c3e50)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #2c3e50, #3498db)';
+            }
+        });
+    </script>
+</body>
+</html>
