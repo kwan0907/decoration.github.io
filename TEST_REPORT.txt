@@ -1,0 +1,23 @@
+AppleBot CUSTOMER v2.2.3.10 - MONITOR STRICT TARGET LOCK REGRESSION
+Test date: 2026-09-19
+
+Monitor safety fixes mirror the private build:
+- Exact detected iPhone 18 Pro Max model/storage/finish/Apple part/SKU lock.
+- pickup-only hard enforcement for Monitor.
+- 256GB / 512GB auto-buy only; 1TB / 2TB notify-only.
+- no unknown-model fallback to iPhone 17.
+- worker-level block on wrong product navigation and monitor config mutation.
+- content-script lock checked on every cycle.
+- exact part/SKU-only pickup API filtering.
+- if detected store sells out, only another store with the same exact SKU may be used; otherwise wait, never Shipping.
+
+Regression suite: PASS 47/47 with customer Review semantics.
+Includes monitor hit binding, iPhone17 mutation rejection, Shipping mutation rejection, 1TB no-auto-buy, worker navigation lock, exact part filtering, sold-out pickup-only behavior, explicit manual iPhone17/manual Shipping preservation, and Review wrong-product rejection.
+
+Static/package checks
+- node --check: w.js PASS
+- node --check: c.js PASS
+- node --check: p.js PASS
+- manifest.json parse PASS
+
+No real paid Apple order was submitted during local regression testing.

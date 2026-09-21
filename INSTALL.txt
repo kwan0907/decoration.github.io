@@ -1,0 +1,16 @@
+AppleBot Native Universal v2.2.3.10 Customer Monitor Strict Lock
+
+安裝／更新：
+1. 先停止現有任務／Monitor。
+2. 解壓 ZIP。
+3. Chrome 開 chrome://extensions。
+4. AppleBot 按「重新載入 / Reload」；首次安裝則按「載入未封裝項目」並選擇本資料夾。
+5. 確認版本顯示 v2.2.3.10。
+
+Monitor 規則：
+- 只自動購買 iPhone 18 Pro Max 256GB / 512GB。
+- 1TB / 2TB 只通知。
+- 命中後鎖定同一容量、顏色及 Apple Part/SKU，全程只自取。
+- 原門市無貨時，只可改用另一間有同一 SKU 的 Apple Store；如果沒有，就等待，不會轉送貨或轉其他機型。
+
+客戶版不包含私人 Full Auto Card 功能。

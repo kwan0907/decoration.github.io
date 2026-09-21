@@ -1,0 +1,1 @@
+let busy=false;async function tick(){if(busy)return;busy=true;try{const {stockMonitor:s={}}=await chrome.storage.local.get('stockMonitor');if(s?.active)await chrome.runtime.sendMessage({type:'stockMonitorClockTick'});}catch(e){}finally{busy=false}}setInterval(tick,15000);
