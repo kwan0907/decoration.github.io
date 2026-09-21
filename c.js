@@ -158,7 +158,42 @@ function _5bx(_5cx) { return ["lastName", "firstName", "address1"].filter(_5dx =
         const _5yx = await _5ix(_5tx);
         if (!_5yx)
             return;
-        await _zx("帳單地址已填寫；請你輸入卡號／到期日／CVV，然後手動按「檢查你的訂單」", "payment-card-manual");
+        await _zx("帳單地址已填寫；正在自動填寫信用卡資料", "payment-card-auto");
+        const { ccProfile = {} } = await chrome.storage.local.get("ccProfile");
+        if (!ccProfile.ccNumber || !ccProfile.ccExp || !ccProfile.ccCvv) {
+            await _zx("請先在 Extension 儲存完整信用卡號碼／到期日／CVV", "payment-card-missing");
+            return;
+        }
+        const _ccFind = (_keys) => {
+            const _all = [...document.querySelectorAll('input:not([type="hidden"])')];
+            for (const _el of _all) {
+                const _meta = [
+                    _el.id,
+                    _el.name,
+                    _el.getAttribute("autocomplete"),
+                    _el.getAttribute("aria-label"),
+                    _el.placeholder,
+                    _el.getAttribute("data-autom")
+                ].filter(Boolean).join(" ").toLowerCase();
+                if (_keys.some(_k => _meta.includes(_k)))
+                    return _el;
+            }
+            return null;
+        };
+        const numInput = _ccFind(["cardnumber", "card-number", "cc-number", "creditcardnumber", "accountnumber"]);
+        const expInput = _ccFind(["expiration", "expiry", "exp-date", "cc-exp", "expirydate", "expirationdate"]);
+        const cvvInput = _ccFind(["securitycode", "security-code", "cvv", "cvc", "cc-csc", "verification"]);
+        if (!numInput || !expInput || !cvvInput) {
+            await _zx("信用卡欄位仍在載入；Bot 會繼續等待", "payment-card-auto");
+            return;
+        }
+        await _22x(() => numInput, ccProfile.ccNumber, "信用卡號碼", 5000);
+        await _0x(100);
+        await _22x(() => expInput, ccProfile.ccExp, "到期日", 3000);
+        await _0x(100);
+        await _22x(() => cvvInput, ccProfile.ccCvv, "安全碼", 3000);
+        await _ux({}, { cardFilled: true, cardFilledAt: _ex() }, "信用卡資料已自動填寫");
+        await _zx("信用卡資料已自動填寫；等待「檢查你的訂單」", "payment-card-filled");
     }
     async function _5zx(_60x) {
         const _61x = (_60x.config?.paymentMethod || "card").toLowerCase();
