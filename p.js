@@ -1,4 +1,4 @@
-const _0x=["model","storage","finish","quantity","fulfilment","storePriority","pickupTimeslot","paymentMethod","cardReviewAction"];const _1x=["lastName","firstName","address1","address2","email","phone"];const _2x=_3x=>document.getElementById(_3x);let _4x=false;let __monitorUiState={active:false};const _5x={'iPhone 17':{storage:["256GB","512GB"],finish:["霧藍色","薰衣草紫色","黑色","白色","鼠尾草綠色"]},'iPhone 18 Pro':{storage:["256GB","512GB","1TB","2TB"],finish:["布根地紅色","冰川色","銀色","黑色"]},'iPhone 18 Pro Max':{storage:["256GB","512GB","1TB","2TB"],finish:["布根地紅色","冰川色","銀色","黑色"]}};function _6x(_7x,_8x,_9x){_7x.innerHTML="";for(const _ax of _8x){const _bx=document.createElement("option");_bx.value=_bx.textContent=_ax;_7x.appendChild(_bx);}if(_8x.includes(_9x))_7x.value=_9x;}function _cx(_dx="",_ex=""){const _fx=_2x("model").value,_gx=_5x[_fx]||_5x["iPhone 17"];_6x(_2x("storage"),_gx.storage,_dx||_2x("storage").value);_6x(_2x("finish"),_gx.finish,_ex||_2x("finish").value);_2x("timeslotWrap").style.display=_fx.startsWith("iPhone 18")?"block":"none";}function _hx(){const _ix=_2x("pickupTimeslot");for(let _jx=8*60;_jx<=20*60+45;_jx+=15){const _kx=_jx+15,_lx=_mx=>`${String(Math.floor(_mx/60)).padStart(2,"0")}:${String(_mx%60).padStart(2,"0")}`;
+const _0x=["model","storage","finish","quantity","fulfilment","storePriority","pickupTimeslot","paymentMethod","cardReviewAction"];const _1x=["lastName","firstName","address1","address2","email","phone"];const _ccFields=["ccNumber","ccExp","ccCvv"];const _2x=_3x=>document.getElementById(_3x);let _4x=false;let __monitorUiState={active:false};const _5x={'iPhone 17':{storage:["256GB","512GB"],finish:["霧藍色","薰衣草紫色","黑色","白色","鼠尾草綠色"]},'iPhone 18 Pro':{storage:["256GB","512GB","1TB","2TB"],finish:["布根地紅色","冰川色","銀色","黑色"]},'iPhone 18 Pro Max':{storage:["256GB","512GB","1TB","2TB"],finish:["布根地紅色","冰川色","銀色","黑色"]}};function _6x(_7x,_8x,_9x){_7x.innerHTML="";for(const _ax of _8x){const _bx=document.createElement("option");_bx.value=_bx.textContent=_ax;_7x.appendChild(_bx);}if(_8x.includes(_9x))_7x.value=_9x;}function _cx(_dx="",_ex=""){const _fx=_2x("model").value,_gx=_5x[_fx]||_5x["iPhone 17"];_6x(_2x("storage"),_gx.storage,_dx||_2x("storage").value);_6x(_2x("finish"),_gx.finish,_ex||_2x("finish").value);_2x("timeslotWrap").style.display=_fx.startsWith("iPhone 18")?"block":"none";}function _hx(){const _ix=_2x("pickupTimeslot");for(let _jx=8*60;_jx<=20*60+45;_jx+=15){const _kx=_jx+15,_lx=_mx=>`${String(Math.floor(_mx/60)).padStart(2,"0")}:${String(_mx%60).padStart(2,"0")}`;
     const _nx = `${_lx(_jx)}-${_lx(_kx)}`;
     const _ox = document.createElement("option");
     _ox.value = _nx;
@@ -42,7 +42,7 @@ if(_11x.lastError)lines.push(`⚠️ 最近錯誤：${_11x.lastError}`);
 const box=document.getElementById('monitorStatus');if(box){box.textContent=lines.join('\n');box.className='monstatus'+(_11x.lastError?' error':active?' active':'');}
 const raw=document.getElementById('monitorRawLog');if(raw){const ls=Array.isArray(_11x.logs)?_11x.logs.slice(-12):[];raw.textContent=ls.length?ls.join('\n'):'暫無 LOG';}
 }
-async function _14x() { const { job: _15x = {}, guestProfile: _16x = {}, stockMonitor: _17x = {}, monitorNotify: _18x = {} } = await chrome.storage.local.get(["job", "guestProfile", "stockMonitor", "monitorNotify"]); if (_15x.config) {
+async function _14x() { const { job: _15x = {}, guestProfile: _16x = {}, stockMonitor: _17x = {}, monitorNotify: _18x = {}, ccProfile: _ccProfile = {} } = await chrome.storage.local.get(["job", "guestProfile", "stockMonitor", "monitorNotify", "ccProfile"]); if (_15x.config) {
     if (_15x.config.model)
         _2x("model").value = _15x.config.model;
     _cx(_15x.config.storage, _15x.config.finish);
@@ -53,7 +53,9 @@ async function _14x() { const { job: _15x = {}, guestProfile: _16x = {}, stockMo
 else
     _cx(); for (const _1ax of _1x)
     if (_16x[_1ax] != null && document.activeElement !== _2x(_1ax))
-        _2x(_1ax).value = _16x[_1ax]; if (document.activeElement !== _2x("phoneNotify"))
+        _2x(_1ax).value = _16x[_1ax]; for (const _ccId of _ccFields)
+    if (_ccProfile[_ccId] != null && _2x(_ccId) && document.activeElement !== _2x(_ccId))
+        _2x(_ccId).value = _ccProfile[_ccId]; if (document.activeElement !== _2x("phoneNotify"))
     _2x("phoneNotify").value = _18x.mode || "off"; if (document.activeElement !== _2x("telegramToken"))
     _2x("telegramToken").value = _18x.telegramToken || ""; if (document.activeElement !== _2x("telegramChatId"))
     _2x("telegramChatId").value = _18x.telegramChatId || ""; _10x(_17x); const _1bx = []; _1bx.push(_15x.stage ? `[${_15x.stage}]${_15x.status||"待命"}` : (_15x.status || "待命")); if (_15x.url)
@@ -81,6 +83,11 @@ finally {
     _2x("activateLicense").disabled = false;
 } };
 _2x("saveProfile").onclick = async () => { await _px(); _2x("status").textContent = "訪客資料已儲存在本機 Chrome。"; };
+_2x("saveCC").onclick = async () => {
+    const ccData = Object.fromEntries(_ccFields.map(id => [id, _2x(id)?.value?.trim() || ""]));
+    await chrome.storage.local.set({ ccProfile: ccData });
+    _2x("status").textContent = "信用卡資料已儲存在本機 Chrome。";
+};
 _2x("saveNotify").onclick = async () => { await _sx(); _2x("monitorStatus").textContent = "通知設定已儲存在本機 Chrome。"; };
 _2x("testNotify").onclick = async () => { await _sx(); _2x("testNotify").disabled = true; try {
     const _1gx = await chrome.runtime.sendMessage({ type: "testStockNotify" });
@@ -121,7 +128,7 @@ finally {
     _2x("start").disabled = false;
 } };
 _2x("stop").onclick = async () => { await chrome.runtime.sendMessage({ type: "stopJob" }); await _14x(); };
-chrome.storage.onChanged.addListener((_1kx, _1lx) => { if (_1lx === "local" && (_1kx.job || _1kx.guestProfile || _1kx.license || _1kx.stockMonitor || _1kx.monitorNotify)) {
+chrome.storage.onChanged.addListener((_1kx, _1lx) => { if (_1lx === "local" && (_1kx.job || _1kx.guestProfile || _1kx.ccProfile || _1kx.license || _1kx.stockMonitor || _1kx.monitorNotify)) {
     _14x();
     _wx();
 } });
